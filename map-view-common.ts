@@ -32,6 +32,7 @@ export abstract class MapView extends View implements IMapView {
     public static coordinateTappedEvent: string = "coordinateTapped";
     public static coordinateLongPressEvent: string = "coordinateLongPress";
     public static cameraChangedEvent: string = "cameraChanged";
+    public static cameraIdleEvent: string = "cameraIdle";
 
     public static latitudeProperty = new Property("latitude", MAP_VIEW, new PropertyMetadata(0, PropertyMetadataSettings.None, onMapPropertyChanged));
     public static longitudeProperty = new Property("longitude", MAP_VIEW, new PropertyMetadata(0, PropertyMetadataSettings.None, onMapPropertyChanged));

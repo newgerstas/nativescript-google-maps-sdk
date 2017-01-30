@@ -344,6 +344,20 @@ export class MapView extends MapViewCommon {
                     }
                 }));
 
+                gMap.setOnCameraIdleListener(new com.google.android.gms.maps.GoogleMap.OnCameraIdleListener({
+                    onCameraIdle: function() {
+                        let cameraPosition = gMap.getCameraPosition();
+                        owner.notifyCameraEvent(MapViewCommon.cameraIdleEvent, {
+                                latitude: cameraPosition.target.latitude,
+                                longitude: cameraPosition.target.longitude,
+                                zoom: cameraPosition.zoom,
+                                bearing: cameraPosition.bearing,
+                                tilt: cameraPosition.tilt,
+                                bounds: gMap.getProjection().getVisibleRegion().latLngBounds
+                            });
+                    }
+                }));
+
                 owner.notifyMapReady();
             }
         });

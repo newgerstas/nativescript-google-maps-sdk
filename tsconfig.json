@@ -19,6 +19,7 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
+        "references.d.ts",
         "map-view.d.ts",
         "map-view-common.ts",
         "map-view.android.ts",
