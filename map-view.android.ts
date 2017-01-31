@@ -330,31 +330,22 @@ export class MapView extends MapViewCommon {
                         }
 
                         if (cameraChanged) {
+                            let bounds = gMap.getProjection().getVisibleRegion().latLngBounds;
                             owner.notifyCameraEvent(MapViewCommon.cameraChangedEvent, {
                                 latitude: cameraPosition.target.latitude,
                                 longitude: cameraPosition.target.longitude,
                                 zoom: cameraPosition.zoom,
                                 bearing: cameraPosition.bearing,
-                                tilt: cameraPosition.tilt
+                                tilt: cameraPosition.tilt,
+                                bounds: {
+                                    northeast: Position.positionFromLatLng(bounds.northeast.latitude, bounds.northeast.longitude),
+                                    southwest: Position.positionFromLatLng(bounds.southwest.latitude, bounds.southwest.longitude)
+                                }
                             });
                         }
 
                         owner._processingCameraEvent = false;
 
-                    }
-                }));
-
-                gMap.setOnCameraIdleListener(new com.google.android.gms.maps.GoogleMap.OnCameraIdleListener({
-                    onCameraIdle: function() {
-                        let cameraPosition = gMap.getCameraPosition();
-                        owner.notifyCameraEvent(MapViewCommon.cameraIdleEvent, {
-                                latitude: cameraPosition.target.latitude,
-                                longitude: cameraPosition.target.longitude,
-                                zoom: cameraPosition.zoom,
-                                bearing: cameraPosition.bearing,
-                                tilt: cameraPosition.tilt,
-                                bounds: gMap.getProjection().getVisibleRegion().latLngBounds
-                            });
                     }
                 }));
 
@@ -678,7 +669,7 @@ export class Polyline extends PolylineBase {
     }
 
     get width() {
-        return this._android.getStrokeWidth();
+        return this._android.getWidth();
     }
 
     set width(value: number) {
