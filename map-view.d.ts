@@ -80,6 +80,8 @@ declare module "nativescript-google-maps-sdk" {
         public clear(): void;
 
         public setStyle(style: Style): boolean;
+
+        public setCenter(position:Position, zoom?:number): void;
     }
 
     export class Position {

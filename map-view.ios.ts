@@ -170,6 +170,12 @@ export class MapView extends MapViewCommon {
         this.ios.animateToCameraPosition(cameraPosition);
     }
 
+    setCenter(position:Position, zoom?:number) {
+        var cameraPosition = GMSCameraPosition.cameraWithTargetZoom(position.ios, zoom);
+        console.log(cameraPosition);
+        this.ios.animateToCameraPosition(cameraPosition);
+    }
+
     updatePadding() {
         if (this.padding) {
             this.gMap.padding = UIEdgeInsetsMake(

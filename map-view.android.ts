@@ -178,6 +178,17 @@ export class MapView extends MapViewCommon {
         return this.gMap.setMapStyle(styleOptions);
     }
 
+    setCenter(position:Position, zoom?:number) {
+        var cameraUpdate = com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(position.android, zoom);
+        if (!this.gMap) {
+            this._pendingCameraUpdate = true
+            return;
+        }
+
+        this._pendingCameraUpdate = false;
+        this.gMap.moveCamera(cameraUpdate);
+    }
+
     findShape(callback: (shape: IShape) => boolean): IShape {
         return this._shapes.find(callback);
     }

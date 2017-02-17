@@ -139,6 +139,11 @@ var MapView = (function (_super) {
         console.log(cameraPosition);
         this.ios.animateToCameraPosition(cameraPosition);
     };
+    MapView.prototype.setCenter = function (position, zoom) {
+        var cameraPosition = GMSCameraPosition.cameraWithTargetZoom(position.ios, zoom);
+        console.log(cameraPosition);
+        this.ios.animateToCameraPosition(cameraPosition);
+    };
     MapView.prototype.updatePadding = function () {
         if (this.padding) {
             this.gMap.padding = UIEdgeInsetsMake(this.padding[0] || 0, this.padding[2] || 0, this.padding[1] || 0, this.padding[3] || 0);

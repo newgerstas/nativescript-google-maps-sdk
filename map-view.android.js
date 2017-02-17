@@ -140,6 +140,15 @@ var MapView = (function (_super) {
         var styleOptions = new com.google.android.gms.maps.model.MapStyleOptions(JSON.stringify(style));
         return this.gMap.setMapStyle(styleOptions);
     };
+    MapView.prototype.setCenter = function (position, zoom) {
+        var cameraUpdate = com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(position.android, zoom);
+        if (!this.gMap) {
+            this._pendingCameraUpdate = true;
+            return;
+        }
+        this._pendingCameraUpdate = false;
+        this.gMap.moveCamera(cameraUpdate);
+    };
     MapView.prototype.findShape = function (callback) {
         return this._shapes.find(callback);
     };
